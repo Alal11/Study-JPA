@@ -17,13 +17,12 @@ public class JpaMain {
         try {
             // 영속
 
-            Member member = em.find(Member.class, 150L);
-            member.setName("ZZZZZ");
+            Member member = new Member(200L, "member200");
+            em.persist(member);
 
-//            em.persist(member);  // 쓰면 안됨
+            em.flush();  // 쓰기 지연 SQL 저장소에 있는 쿼리들을 DB에 반영시킴 (원래는 커밋할 때 한꺼번에 반영됨)
 
             System.out.println("====================");
-
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
@@ -34,3 +33,4 @@ public class JpaMain {
         emf.close();
     }
 }
+
