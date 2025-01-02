@@ -2,20 +2,15 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
-public class Team {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Item {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "TEAM_ID")
+    @Id @GeneratedValue
     private Long id;
+
     private String name;
-    @OneToMany
-    @JoinColumn(name = "TEAM_ID")
-    private List<Member> members = new ArrayList<>();
+    private int price;
 
     public Long getId() {
         return id;
@@ -33,4 +28,11 @@ public class Team {
         this.name = name;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 }
