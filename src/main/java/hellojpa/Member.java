@@ -2,6 +2,8 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Member {
 
@@ -15,6 +17,12 @@ public class Member {
     @OneToOne
     @JoinColumn(name = "LOCKER_ID")
     private Locker locker;
+
+
+    private String createdBy;
+    private LocalDateTime createDate;
+    private String lastModifiedBy;
+    private LocalDateTime lastModifiedDate;
 
 
     public Long getId() {
