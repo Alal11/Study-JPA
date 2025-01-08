@@ -1,6 +1,7 @@
 package hellojpa;
 
 import jakarta.persistence.*;
+import org.hibernate.Hibernate;
 
 import java.time.LocalDateTime;
 
@@ -25,15 +26,12 @@ public class JpaMain {
 
             Member refMember = em.getReference(Member.class, member1.getId());
             System.out.println("refMember = " + refMember.getClass());  // Proxy
-
-            Member findMember = em.find(Member.class, member1.getId());
-            System.out.println("findMember = " + findMember.getClass());  // Member
-
-            System.out.println("refMember == findMember: " + (refMember == findMember));
+            Hibernate.initialize(refMember);  // 강제 초기화
 
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
+            e.printStackTrace();
         } finally {
             em.close();
         }
