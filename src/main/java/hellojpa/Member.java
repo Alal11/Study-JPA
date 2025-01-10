@@ -2,10 +2,10 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
-public class Member extends BaseEntity {
+public class Member {
 
     @Id
     @GeneratedValue
@@ -14,32 +14,12 @@ public class Member extends BaseEntity {
     @Column(name = "USERNAME")
     private String username;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
-    private Team team;
+    // 기간 Period
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
+    // 주소 Address
+    private String city;
+    private String street;
+    private String zipcode;
 }
